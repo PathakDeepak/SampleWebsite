@@ -4,6 +4,7 @@ from accounts.models import User
 class LoginForm(forms.Form):
     name = forms.CharField()
     passwd = forms.CharField(widget = forms.PasswordInput)
+    
 
 
 user = User()
@@ -34,5 +35,11 @@ class RegisterForm(forms.ModelForm):
         password2 = self.cleaned_data.get('password2')
         if password2 != password :
             raise forms.ValidationError("Password must match")  
-        return data               
+        return data  
+
+    # def clean_file(self):
+    #     file = self.cleaned_data.get('file')
+    #     if file is None:
+    #         raise forms.ValidationError("Upload image")
+    #     return file                     
     

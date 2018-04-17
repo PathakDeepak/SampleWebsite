@@ -6,6 +6,7 @@ from django.http import HttpResponse
 from accounts.models import User
 from . import forms
 from django.contrib.auth import authenticate, login, get_user_model, logout
+from accounts.functions.functions import handle_upload_file
 
 def login_page(request):
     # user_name = User.objects.order_by('user_name')[0].user_name
@@ -23,7 +24,7 @@ def login_page(request):
 
     # return render(request, 'accounts/login.html',{'form':form})    
 
-    form = forms.LoginForm(request.POST or None)
+    form = forms.LoginForm(request.POST  or None, request.FILES)
     context = {'form': form,'a':None}
     if form.is_valid():
         print(form.cleaned_data)
@@ -53,7 +54,7 @@ def register_page(request):
     context = {
         "form":form
     }
-    if form.is_valid():
+    if form.is_valid() and request.method == "POST":
         print(form.cleaned_data)
         username = form.cleaned_data.get("name")
         password = form.cleaned_data.get("passwd")
@@ -63,6 +64,11 @@ def register_page(request):
         email = form.cleaned_data.get("user_email")
         city = form.cleaned_data.get("user_city")
         state = form.cleaned_data.get("user_state")
+        print('before upload')
+        
+        image = form.cleaned_data['user_image']
+        print(image)
+        print('file upload')
 
         new_user = form.save()
         print(new_user.user_name)
