@@ -6,12 +6,15 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
 </head>
 <body>
-  <h1>Fill out the form!</h1>
+  <h1>Login form!</h1>
   <div class="container">
+      {% if a is not  None %}
+      <script>alert('invalid credentials')</script>
+      {% endif %}
       <form method="POST">
           {{ form.as_p }}
           {% csrf_token %}
-          <input type="submit" class="btn btn-primary" value="Submit">
+          <input type="submit" class="btn btn-primary" value="Submit"></form>
       </form>
 
   </div>
