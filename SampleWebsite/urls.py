@@ -16,6 +16,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from django.conf import settings
+from django.conf.urls.static import static
+
 #include app urls to main url file 
 from django.conf.urls import include,url
 from accounts import views
@@ -26,4 +29,4 @@ urlpatterns = [
     #path('accounts/login',views.login),
     url(r'accounts/', include('accounts.urls')),
     #url(r'^home',views.logout),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -11,5 +11,5 @@ class User(models.Model):
     user_email = models.EmailField(max_length=50)
     user_city = models.CharField(max_length=50)
     user_state = models.CharField(max_length=30)
-    user_image = models.ImageField(upload_to = 'upload/' ,default = 'upload/no-img.jpg')
+    user_image = models.ImageField(upload_to='profile_images', blank=True,default='profile_image/default.png' )
 
